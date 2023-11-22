@@ -5,6 +5,7 @@ disable=
     C0116, # Missing function or method docstring
     C0115, # Missing class docstring
     W0221, # arguments-differ
+    R0801, # duplicate-code
     W0622, # Redefining built-in
     W0702, # No exception type(s) specified
     R0903, # Too few public methods
