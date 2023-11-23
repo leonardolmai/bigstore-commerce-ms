@@ -70,7 +70,7 @@ def create_address(
     )
 
 
-@router.patch("/update/{id}", status_code=status.HTTP_200_OK, response_model=AddressOut)
+@router.patch("/{id}", status_code=status.HTTP_200_OK, response_model=AddressOut)
 def update_address(
     id: int,
     address: AddressUpdate,
