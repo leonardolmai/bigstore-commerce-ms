@@ -8,6 +8,7 @@ disable=
     R0801, # duplicate-code
     W0622, # Redefining built-in
     W0702, # No exception type(s) specified
+    R0902, # Too many instance attributes
     R0903, # Too few public methods
     R0913, # Too many arguments
 
