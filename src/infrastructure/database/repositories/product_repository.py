@@ -27,6 +27,7 @@ class ProductRepository(ProductRepositoryInterface):
                         "company_id": product_model.company_id,
                         "category": product_model.category.value,
                         "description": product_model.description,
+                        "is_approved": product_model.is_approved,
                     }
                     product_object = Product(**product_data)
                     product_objects.append(product_object)
@@ -54,6 +55,7 @@ class ProductRepository(ProductRepositoryInterface):
                     "company_id": product_model.company_id,
                     "category": product_model.category.value,
                     "description": product_model.description,
+                    "is_approved": product_model.is_approved,
                 }
                 product_object = Product(**product_data)
                 return product_object
@@ -90,6 +92,7 @@ class ProductRepository(ProductRepositoryInterface):
                     "company_id": product_model.company_id,
                     "category": product_model.category.value,
                     "description": product_model.description,
+                    "is_approved": product_model.is_approved,
                 }
                 product_object = Product(**product_data)
                 return product_object
