@@ -78,3 +78,20 @@ class TestUserController(TestCaseControllerBase):
 
         result = update_user_controller.handle("user1@example.com", user_data)
         self.assertEqual(result, user_data)
+
+    # mutpy
+    # mut.py --target src/presentation/controllers/user/update_user_controller.py
+    #  --unit-test tests/presentation/controllers/test_user_controller.py --show-mutants
+    def test_update_user_handle_without_password_returns_user(self):
+        update_user_use_case_mock = Mock(spec=UpdateUserUseCaseInterface)
+        update_user_controller = UpdateUserController(update_user_use_case_mock)
+
+        user_data = {
+            "id": 1,
+            "name": "User 1",
+            "email": "user1@example.com",
+        }
+        update_user_use_case_mock.execute.return_value = user_data
+
+        result = update_user_controller.handle("user1@example.com", user_data)
+        self.assertEqual(result, user_data)
