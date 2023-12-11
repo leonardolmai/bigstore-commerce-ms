@@ -4,10 +4,15 @@ from fastapi.responses import JSONResponse
 
 async def check_company_cnpj_middleware(request: Request, call_next):
     try:
-        excluded_paths = ["/docs/", "/docs", "/openapi.json", "/token"]
+        excluded_paths = [
+            "/docs/",
+            "/docs",
+            "/openapi.json",
+            "/token",
+        ]
 
         path = request.url.path.rstrip("/")
-        if str(path) not in excluded_paths:
+        if str(path) not in excluded_paths and not path.startswith("/static"):
             cnpj = request.headers.get("x-company-cnpj")
             if not cnpj:
                 raise HTTPException(
