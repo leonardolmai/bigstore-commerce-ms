@@ -6,6 +6,7 @@ from src.presentation.routers import (
     address_routers,
     card_routers,
     company_routers,
+    order_routers,
     product_routers,
     token_routers,
     user_routers,
@@ -24,3 +25,4 @@ app.include_router(company_routers.router)
 app.include_router(address_routers.router)
 app.include_router(card_routers.router)
 app.include_router(product_routers.router)
+app.include_router(order_routers.router)
