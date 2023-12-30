@@ -14,6 +14,12 @@ class UserCompanyRepositoryInterface(ABC):
         pass
 
     @abstractmethod
+    def list_all_user_companies(
+        self, user: User, company: Company
+    ) -> list[UserCompany] | None:
+        pass
+
+    @abstractmethod
     def get_user_company(self, id: int) -> UserCompany | None:
         pass
 
