@@ -11,9 +11,15 @@ from src.presentation.composers.user.delete_user_composer import delete_user_com
 from src.presentation.composers.user.get_authenticated_user_composer import (
     get_authenticated_user_composer,
 )
+from src.presentation.composers.user.get_user_type_composer import (
+    get_user_type_composer,
+)
 from src.presentation.composers.user.list_users_composer import list_users_composer
 from src.presentation.composers.user.update_user_composer import update_user_composer
-from src.presentation.schemas.user import UserCreate, UserOut, UserUpdate
+from src.presentation.dependencies.get_current_company import get_current_company
+from src.presentation.dependencies.get_current_user import get_current_user
+from src.presentation.schemas.company import CompanyOut
+from src.presentation.schemas.user import UserCreate, UserOut, UserTypeOut, UserUpdate
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -85,3 +91,18 @@ def delete_user(
     if user:
         return
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found.")
+
+
+@router.get("/type", status_code=status.HTTP_200_OK, response_model=UserTypeOut)
+def get_user_type(
+    x_company_cnpj: Annotated[str, Header()],
+    current_user: UserOut = Depends(get_current_user),
+    current_company: CompanyOut = Depends(get_current_company),
+    session: Session = Depends(get_db),
+):
+    user_type = get_user_type_composer(session, current_user, current_company)
+    if user_type:
+        return user_type
+    raise HTTPException(
+        status_code=status.HTTP_400_BAD_REQUEST, detail="Unable to set user type."
+    )
