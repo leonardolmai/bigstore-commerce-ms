@@ -33,7 +33,7 @@ class UserCompanyRepository(UserCompanyRepositoryInterface):
         try:
             return (
                 self.session.query(UserCompanyModel)
-                .filter_by(company_id=company.id)
+                .filter_by(user_id=user.id, company_id=company.id)
                 .all()
             )
         except:
@@ -62,6 +62,7 @@ class UserCompanyRepository(UserCompanyRepositoryInterface):
                     self.session.query(UserCompanyModel).filter(
                         UserCompanyModel.id == existing_relation.id
                     ).update({UserCompanyModel.is_employee: True})
+                    print("is_jaksjj")
                     self.session.commit()
                     user_company_updated = self.get_user_company(existing_relation.id)
 
