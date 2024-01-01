@@ -61,7 +61,6 @@ def get_product(
     # current_user: UserOut = Depends(get_current_user),
     session: Session = Depends(get_db),
 ):
-    print("jjkj")
     # if current_user:
     product = get_product_composer(session, id)
     if product:
