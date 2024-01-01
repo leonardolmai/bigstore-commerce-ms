@@ -29,8 +29,24 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    # allow_methods=["POST", "GET", "OPTIONS"],
-    # allow_headers=["Content-Type", "Authorization"],
+    # expose_headers=["Authorization"],
+    # allow_methods=["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    # allow_headers=[
+    #     "Accept",
+    #     "Content-Type",
+    #     "Origin",
+    #     "Authorization",
+    #     "X-CSRF-Token",
+    #     "X-Requested-With",
+    #     "X-Company-CNPJ",
+    #     "Cache-Control",
+    #     "If-None-Match",
+    #     "Access-Control-Allow-Origin",
+    #     "Access-Control-Allow-Methods",
+    #     "Access-Control-Allow-Headers",
+    #     "Authorization",
+    #     "X-Company-CNPJ",
+    # ],
 )
 
 app.include_router(user_routers.router)
