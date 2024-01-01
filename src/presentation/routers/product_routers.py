@@ -41,14 +41,14 @@ router = APIRouter(prefix="/products", tags=["products"])
 @router.get("/", status_code=status.HTTP_200_OK, response_model=list[ProductOut])
 def list_products(
     x_company_cnpj: Annotated[str, Header()],
-    current_user: UserOut = Depends(get_current_user),
+    # current_user: UserOut = Depends(get_current_user),
     # current_company: CompanyOut = Depends(get_current_company),
     session: Session = Depends(get_db),
 ):
-    if current_user:
-        products = list_products_composer(session)
-        if products:
-            return products
+    # if current_user:
+    products = list_products_composer(session)
+    if products:
+        return products
     raise HTTPException(
         status_code=status.HTTP_400_BAD_REQUEST, detail="Products not found."
     )
@@ -58,13 +58,14 @@ def list_products(
 def get_product(
     id: int,
     x_company_cnpj: Annotated[str, Header()],
-    current_user: UserOut = Depends(get_current_user),
+    # current_user: UserOut = Depends(get_current_user),
     session: Session = Depends(get_db),
 ):
-    if current_user:
-        product = get_product_composer(session, id)
-        if product:
-            return product
+    print("jjkj")
+    # if current_user:
+    product = get_product_composer(session, id)
+    if product:
+        return product
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND, detail="Product not found."
     )
@@ -136,7 +137,7 @@ async def list_product_images(
     id: int,
     x_company_cnpj: Annotated[str, Header()],
     current_company: CompanyOut = Depends(get_current_company),
-    current_user: UserOut = Depends(get_current_user),
+    # current_user: UserOut = Depends(get_current_user),
     session: Session = Depends(get_db),
 ):
     if current_company:
