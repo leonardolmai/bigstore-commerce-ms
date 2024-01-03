@@ -20,7 +20,7 @@ app.middleware("http")(check_company_cnpj_middleware)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-origins = ["http://localhost:3000", "http://0.0.0.0:8000"]
+origins = ["http://localhost:3000", "http://127.0.0.1:8000"]
 
 app.add_middleware(
     CORSMiddleware,
