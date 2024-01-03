@@ -25,3 +25,7 @@ class UserOut(BaseModel):
     phone: str | None
     cpf: str | None
     is_active: bool
+
+
+class UserTypeOut(BaseModel):
+    type: str

@@ -27,6 +27,18 @@ class UserCompanyRepository(UserCompanyRepositoryInterface):
         except:
             return None
 
+    def list_all_user_companies(
+        self, user: User, company: Company
+    ) -> list[UserCompany] | None:
+        try:
+            return (
+                self.session.query(UserCompanyModel)
+                .filter_by(user_id=user.id, company_id=company.id)
+                .all()
+            )
+        except:
+            return None
+
     def get_user_company(self, id: int) -> UserCompany | None:
         try:
             return (
@@ -50,6 +62,7 @@ class UserCompanyRepository(UserCompanyRepositoryInterface):
                     self.session.query(UserCompanyModel).filter(
                         UserCompanyModel.id == existing_relation.id
                     ).update({UserCompanyModel.is_employee: True})
+                    print("is_jaksjj")
                     self.session.commit()
                     user_company_updated = self.get_user_company(existing_relation.id)
 
