@@ -4,9 +4,9 @@ from src.domain.use_cases.address.list_addresses import ListAddressesUseCaseInte
 
 
 class ListAddressessUseCase(ListAddressesUseCaseInterface):
-    def __init__(self, user_repository: AddressRepositoryInterface) -> None:
-        self.__user_repository = user_repository
+    def __init__(self, address_repository: AddressRepositoryInterface) -> None:
+        self.__address_repository = address_repository
 
     def execute(self, user_id: int) -> list[Address] | None:
-        address = self.__user_repository.list_address(user_id)
+        address = self.__address_repository.list_address(user_id)
         return address

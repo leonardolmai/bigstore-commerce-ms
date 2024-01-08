@@ -24,6 +24,18 @@ from src.presentation.schemas.user import UserOut
 
 router = APIRouter(prefix="/addresses", tags=["addresses"])
 
+@router.get("/", status_code=status.HTTP_200_OK, response_model=list[AddressOut])
+def list_addresses(
+    x_company_cnpj: Annotated[str, Header()],
+    current_user: UserOut = Depends(get_current_user),
+    session: Session = Depends(get_db),
+):
+    address = list_addresses_composer(session, current_user.id)
+    if address:
+        return address
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail="List addresses not found."
+    )
 
 @router.get("/{id}", status_code=status.HTTP_200_OK, response_model=AddressOut)
 def get_address(
@@ -37,20 +49,6 @@ def get_address(
         return address
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND, detail="get-address for id, not found."
-    )
-
-
-@router.get("/", status_code=status.HTTP_200_OK, response_model=list[AddressOut])
-def list_addresses(
-    x_company_cnpj: Annotated[str, Header()],
-    current_user: UserOut = Depends(get_current_user),
-    session: Session = Depends(get_db),
-):
-    address = list_addresses_composer(current_user.user_id, session)
-    if address:
-        return address
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND, detail="List addresses not found."
     )
 
 
